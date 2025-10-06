@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    app.openshift.io/vcs-uri: https://github.com/jovemfelix/oracle-tester-quarkus.git
+    openshift.io/generated-by: OpenShiftWebConsole
+  labels:
+    app: oracle-tester-quarkus-git
+    app.kubernetes.io/component: oracle-tester-quarkus-git
+    app.kubernetes.io/instance: oracle-tester-quarkus-git
+    app.kubernetes.io/name: oracle-tester-quarkus-git
+    app.kubernetes.io/part-of: oracle-jdbc-tester-git-app
+  name: oracle-tester-quarkus-git
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oracle-tester-quarkus-git
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: oracle-tester-quarkus-git
+        deployment: oracle-tester-quarkus-git
+    spec:
+      containers:
+      - env:
+        - name: DB_HOST
+          value: 'xxxx'
+        - name: DB_SID
+          value: 'xxxx'
+        - name: DB_USER
+          value: 'xxxx'
+        - name: DB_PASS
+          value: 'xxxx'
+        - name: DB_PORT
+          value: "1521"
+        image: quay.io/rfelix/oracle-tester-quarkus:1.0
+        imagePullPolicy: Always
+        name: oracle-tester-quarkus-git
+        ports:
+        - containerPort: 8080
+          protocol: TCP
